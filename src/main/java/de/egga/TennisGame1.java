@@ -27,12 +27,8 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
-    public void wonPoint(String playerName) {
-        if ("player1".equals(playerName)) {
-            a += 1;
-        } else {
-            b += 1;
-        }
+    private static String absoluteScore(int a1, int b1) {
+        return scoreToString(a1) + "-" + scoreToString(b1);
     }
 
     private static String getWinningScore(int a1, int b1) {
@@ -61,6 +57,14 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
+    public void wonPoint(String playerName) {
+        if ("player1".equals(playerName)) {
+            a += 1;
+        } else {
+            b += 1;
+        }
+    }
+
     public String getScore() {
         final int a1 = this.a;
         final int b1 = this.b;
@@ -70,7 +74,7 @@ public class TennisGame1 implements TennisGame {
         }
 
         if (a1 < 4 && b1 < 4) {
-            return scoreToString(a1) + "-" + scoreToString(b1);
+            return absoluteScore(a1, b1);
         } else {
             return getWinningScore(a1, b1);
         }
