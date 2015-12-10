@@ -68,25 +68,29 @@ public class TennisGame1 implements TennisGame {
                     score += "-"; tempScore = b1;
                 }
 
-                String toBeAdded = "";
-                switch(tempScore)
-                {
-                    case 0:
-                        toBeAdded="Love";
-                        break;
-                    case 1:
-                        toBeAdded="Fifteen";
-                        break;
-                    case 2:
-                        toBeAdded="Thirty";
-                        break;
-                    case 3:
-                        toBeAdded="Forty";
-                        break;
-                }
-                score += toBeAdded;
+                score += findToBeAdded(tempScore);
             }
         }
         return score;
+    }
+
+    private String findToBeAdded(int tempScore) {
+        String toBeAdded = "";
+        switch(tempScore)
+        {
+            case 0:
+                toBeAdded="Love";
+                break;
+            case 1:
+                toBeAdded="Fifteen";
+                break;
+            case 2:
+                toBeAdded="Thirty";
+                break;
+            case 3:
+                toBeAdded="Forty";
+                break;
+        }
+        return toBeAdded;
     }
 }
