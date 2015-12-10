@@ -13,38 +13,46 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
-    static class Scores {
+    static class EqualScores {
         static final String DEUCE = "Deuce";
         static final String THIRTY_ALL = "Thirty-All";
         static final String FIFTEEN_ALL = "Fifteen-All";
         static final String LOVE_ALL = "Love-All";
     }
 
+    private static String getEqualScore(int a1) {
+        String score;
+        switch (a1)
+        {
+            case 0:
+                score = EqualScores.LOVE_ALL;
+                break;
+            case 1:
+                score = EqualScores.FIFTEEN_ALL;
+                break;
+            case 2:
+                score = EqualScores.THIRTY_ALL;
+                break;
+            default:
+                score = EqualScores.DEUCE;
+                break;
+
+        }
+        return score;
+    }
+
     public String getScore() {
         String score = "";
         int tempScore=0;
-        if (a == b)
+        final int a1 = this.a;
+        final int b1 = this.b;
+        if (a1 == b1)
         {
-            switch (a)
-            {
-                case 0:
-                    score = Scores.LOVE_ALL;
-                    break;
-                case 1:
-                    score = Scores.FIFTEEN_ALL;
-                    break;
-                case 2:
-                    score = Scores.THIRTY_ALL;
-                    break;
-                default:
-                    score = Scores.DEUCE;
-                    break;
-
-            }
+            score = getEqualScore(a1);
         }
-        else if (a >=4 || b >=4)
+        else if (a1 >=4 || b1 >=4)
         {
-            int minusResult = a - b;
+            int minusResult = a1 - b1;
             if (minusResult==1) score ="Advantage player1";
             else if (minusResult ==-1) score ="Advantage player2";
             else if (minusResult>=2) score = "Win for player1";
@@ -54,8 +62,8 @@ public class TennisGame1 implements TennisGame {
         {
             for (int i=1; i<3; i++)
             {
-                if (i==1) tempScore = a;
-                else { score+="-"; tempScore = b;}
+                if (i==1) tempScore = a1;
+                else { score+="-"; tempScore = b1;}
                 switch(tempScore)
                 {
                     case 0:
