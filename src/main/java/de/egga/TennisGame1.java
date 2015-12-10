@@ -59,15 +59,8 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
-            for (int i=1; i<3; i++) {
-                if (i == 1) {
-                    score += findToBeAdded(a1);
-                } else {
-                    score += "-";
-                    score += findToBeAdded(b1);
-                }
-
-            }
+            score += findToBeAdded(a1);
+            score += "-" + findToBeAdded(b1);
         }
         return score;
     }
