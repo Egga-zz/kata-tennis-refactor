@@ -2,10 +2,6 @@ package de.egga;
 
 public class TennisGame1 implements TennisGame {
 
-    public static final String LOVE_ALL = "Love-All";
-    public static final String FIFTEEN_ALL = "Fifteen-All";
-    public static final String THIRTY_ALL = "Thirty-All";
-    public static final String DEUCE = "Deuce";
     private int a = 0;
     private int b = 0;
 
@@ -17,6 +13,13 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
+    static class Scores {
+        static final String DEUCE = "Deuce";
+        static final String THIRTY_ALL = "Thirty-All";
+        static final String FIFTEEN_ALL = "Fifteen-All";
+        static final String LOVE_ALL = "Love-All";
+    }
+
     public String getScore() {
         String score = "";
         int tempScore=0;
@@ -25,16 +28,16 @@ public class TennisGame1 implements TennisGame {
             switch (a)
             {
                 case 0:
-                    score = LOVE_ALL;
+                    score = Scores.LOVE_ALL;
                     break;
                 case 1:
-                    score = FIFTEEN_ALL;
+                    score = Scores.FIFTEEN_ALL;
                     break;
                 case 2:
-                    score = THIRTY_ALL;
+                    score = Scores.THIRTY_ALL;
                     break;
                 default:
-                    score = DEUCE;
+                    score = Scores.DEUCE;
                     break;
 
             }
