@@ -18,27 +18,19 @@ public class TennisGame1 implements TennisGame {
         static final String THIRTY_ALL = "Thirty-All";
         static final String FIFTEEN_ALL = "Fifteen-All";
         static final String LOVE_ALL = "Love-All";
-    }
 
-    private static String getEqualScore(int a1) {
-        String score;
-        switch (a1)
-        {
-            case 0:
-                score = EqualScores.LOVE_ALL;
-                break;
-            case 1:
-                score = EqualScores.FIFTEEN_ALL;
-                break;
-            case 2:
-                score = EqualScores.THIRTY_ALL;
-                break;
-            default:
-                score = EqualScores.DEUCE;
-                break;
-
+        private static String get(int value) {
+            switch (value) {
+                case 0:
+                    return LOVE_ALL;
+                case 1:
+                    return FIFTEEN_ALL;
+                case 2:
+                    return THIRTY_ALL;
+                default:
+                    return DEUCE;
+            }
         }
-        return score;
     }
 
     public String getScore() {
@@ -48,7 +40,7 @@ public class TennisGame1 implements TennisGame {
         final int b1 = this.b;
         if (a1 == b1)
         {
-            score = getEqualScore(a1);
+            score = EqualScores.get(a1);
         }
         else if (a1 >=4 || b1 >=4)
         {
