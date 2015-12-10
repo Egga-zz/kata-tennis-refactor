@@ -33,11 +33,22 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
+    private static String getWinningScore(int a1, int b1) {
+        String score;
+        int minusResult = a1 - b1;
+        if (minusResult==1) score ="Advantage player1";
+        else if (minusResult ==-1) score ="Advantage player2";
+        else if (minusResult>=2) score = "Win for player1";
+        else score ="Win for player2";
+        return score;
+    }
+
     public String getScore() {
         String score = "";
-        int tempScore=0;
+
         final int a1 = this.a;
         final int b1 = this.b;
+
         if (a1 == b1)
         {
             score = EqualScores.get(a1);
@@ -48,6 +59,7 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
+            int tempScore;
             for (int i=1; i<3; i++)
             {
                 if (i==1) tempScore = a1;
@@ -69,16 +81,6 @@ public class TennisGame1 implements TennisGame {
                 }
             }
         }
-        return score;
-    }
-
-    private static String getWinningScore(int a1, int b1) {
-        String score;
-        int minusResult = a1 - b1;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
         return score;
     }
 }
