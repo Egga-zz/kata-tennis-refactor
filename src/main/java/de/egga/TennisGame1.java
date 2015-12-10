@@ -14,7 +14,7 @@ public class TennisGame1 implements TennisGame {
     private int a = 0;
     private int b = 0;
 
-    private static String getEqualScore(int value) {
+    private static String equalScore(int value) {
         switch (value) {
             case 0:
                 return LOVE_ALL;
@@ -27,23 +27,22 @@ public class TennisGame1 implements TennisGame {
         }
     }
 
-    private static String absoluteScore(int a1, int b1) {
-        return scoreToString(a1) + "-" + scoreToString(b1);
+    private static String absoluteScore(int a, int b) {
+        return scoreToString(a) + "-" + scoreToString(b);
     }
 
-    private static String getWinningScore(int a1, int b1) {
+    private static String relativeScore(int a1, int b1) {
         String score;
         int minusResult = a1 - b1;
-        if (minusResult==1) score ="Advantage player1";
-        else if (minusResult ==-1) score ="Advantage player2";
-        else if (minusResult>=2) score = "Win for player1";
-        else score ="Win for player2";
+        if (minusResult == 1) score = "Advantage player1";
+        else if (minusResult == -1) score = "Advantage player2";
+        else if (minusResult >= 2) score = "Win for player1";
+        else score = "Win for player2";
         return score;
     }
 
     private static String scoreToString(int tempScore) {
-        switch(tempScore)
-        {
+        switch (tempScore) {
             case 0:
                 return LOVE;
             case 1:
@@ -70,13 +69,14 @@ public class TennisGame1 implements TennisGame {
         final int b1 = this.b;
 
         if (a1 == b1) {
-            return getEqualScore(a1);
+            return equalScore(a1);
         }
 
         if (a1 < 4 && b1 < 4) {
             return absoluteScore(a1, b1);
-        } else {
-            return getWinningScore(a1, b1);
         }
+
+        return relativeScore(a1, b1);
     }
+
 }
