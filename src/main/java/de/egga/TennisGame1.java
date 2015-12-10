@@ -2,34 +2,36 @@ package de.egga;
 
 public class TennisGame1 implements TennisGame {
 
+    static final String LOVE = "Love";
+    static final String FIFTEEN = "Fifteen";
+    static final String THIRTY = "Thirty";
+    static final String FORTY = "Forty";
+    static final String DEUCE = "Deuce";
+    static final String THIRTY_ALL = "Thirty-All";
+    static final String FIFTEEN_ALL = "Fifteen-All";
+    static final String LOVE_ALL = "Love-All";
+
     private int a = 0;
     private int b = 0;
+
+    private static String getEqualScore(int value) {
+        switch (value) {
+            case 0:
+                return LOVE_ALL;
+            case 1:
+                return FIFTEEN_ALL;
+            case 2:
+                return THIRTY_ALL;
+            default:
+                return DEUCE;
+        }
+    }
 
     public void wonPoint(String playerName) {
         if ("player1".equals(playerName)) {
             a += 1;
         } else {
             b += 1;
-        }
-    }
-
-    static class EqualScores {
-        static final String DEUCE = "Deuce";
-        static final String THIRTY_ALL = "Thirty-All";
-        static final String FIFTEEN_ALL = "Fifteen-All";
-        static final String LOVE_ALL = "Love-All";
-
-        private static String get(int value) {
-            switch (value) {
-                case 0:
-                    return LOVE_ALL;
-                case 1:
-                    return FIFTEEN_ALL;
-                case 2:
-                    return THIRTY_ALL;
-                default:
-                    return DEUCE;
-            }
         }
     }
 
@@ -43,6 +45,22 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
+    private static String findToBeAdded(int tempScore) {
+        switch(tempScore)
+        {
+            case 0:
+                return LOVE;
+            case 1:
+                return FIFTEEN;
+            case 2:
+                return THIRTY;
+            case 3:
+                return FORTY;
+            default:
+                return "";
+        }
+    }
+
     public String getScore() {
         String score = "";
 
@@ -51,7 +69,7 @@ public class TennisGame1 implements TennisGame {
 
         if (a1 == b1)
         {
-            score = EqualScores.get(a1);
+            score = getEqualScore(a1);
         }
         else if (a1 >=4 || b1 >=4)
         {
@@ -59,29 +77,8 @@ public class TennisGame1 implements TennisGame {
         }
         else
         {
-            score += findToBeAdded(a1);
-            score += "-" + findToBeAdded(b1);
+            score += findToBeAdded(a1) + "-" + findToBeAdded(b1);
         }
         return score;
-    }
-
-    private String findToBeAdded(int tempScore) {
-        String toBeAdded = "";
-        switch(tempScore)
-        {
-            case 0:
-                toBeAdded="Love";
-                break;
-            case 1:
-                toBeAdded="Fifteen";
-                break;
-            case 2:
-                toBeAdded="Thirty";
-                break;
-            case 3:
-                toBeAdded="Forty";
-                break;
-        }
-        return toBeAdded;
     }
 }
