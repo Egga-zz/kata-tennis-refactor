@@ -45,7 +45,7 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private static String findToBeAdded(int tempScore) {
+    private static String scoreToString(int tempScore) {
         switch(tempScore)
         {
             case 0:
@@ -62,23 +62,15 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
-
         final int a1 = this.a;
         final int b1 = this.b;
 
-        if (a1 == b1)
-        {
-            score = getEqualScore(a1);
+        if (a1 == b1) {
+            return getEqualScore(a1);
+        } else if (a1 >= 4 || b1 >= 4) {
+            return getWinningScore(a1, b1);
+        } else {
+            return scoreToString(a1) + "-" + scoreToString(b1);
         }
-        else if (a1 >=4 || b1 >=4)
-        {
-            score = getWinningScore(a1, b1);
-        }
-        else
-        {
-            score += findToBeAdded(a1) + "-" + findToBeAdded(b1);
-        }
-        return score;
     }
 }
