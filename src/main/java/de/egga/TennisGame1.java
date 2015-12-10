@@ -67,21 +67,24 @@ public class TennisGame1 implements TennisGame {
                 } else {
                     score += "-"; tempScore = b1;
                 }
+
+                String toBeAdded = "";
                 switch(tempScore)
                 {
                     case 0:
-                        score+="Love";
+                        toBeAdded="Love";
                         break;
                     case 1:
-                        score+="Fifteen";
+                        toBeAdded="Fifteen";
                         break;
                     case 2:
-                        score+="Thirty";
+                        toBeAdded="Thirty";
                         break;
                     case 3:
-                        score+="Forty";
+                        toBeAdded="Forty";
                         break;
                 }
+                score += toBeAdded;
             }
         }
         return score;
