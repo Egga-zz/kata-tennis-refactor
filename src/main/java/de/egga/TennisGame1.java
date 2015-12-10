@@ -67,7 +67,9 @@ public class TennisGame1 implements TennisGame {
 
         if (a1 == b1) {
             return getEqualScore(a1);
-        } else if (a1 >= 4 || b1 >= 4) {
+        }
+
+        if (a1 >= 4 || b1 >= 4) {
             return getWinningScore(a1, b1);
         } else {
             return scoreToString(a1) + "-" + scoreToString(b1);
