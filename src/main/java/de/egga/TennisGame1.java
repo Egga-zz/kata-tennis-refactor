@@ -2,38 +2,38 @@ package de.egga;
 
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private final String firstTeamName;
-    private final String secondTeamName;
+    private int scoreOfTeamOne = 0;
+    private int scoreOfTeamTwo = 0;
+    private final String teamOne;
+    private final String teamTwo;
 
     private final String[] SCORE_NAMES = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
 
 
-    public TennisGame1(String firstTeamName, String secondTeamName) {
-        this.firstTeamName = firstTeamName;
-        this.secondTeamName = secondTeamName;
+    public TennisGame1(String teamOne, String teamTwo) {
+        this.teamOne = teamOne;
+        this.teamTwo = teamTwo;
     }
 
     public void wonPoint(String playerName) {
-        if (firstTeamName.equals(playerName))
-            m_score1++;
+        if (teamOne.equals(playerName))
+            scoreOfTeamOne++;
         else
-            m_score2++;
+            scoreOfTeamTwo++;
     }
 
     public String getScore() {
 
-        if (m_score1 == 3 && m_score2 == 3 || m_score1 == 4 && m_score2 == 4)
+        if (scoreOfTeamOne == 3 && scoreOfTeamTwo == 3 || scoreOfTeamOne == 4 && scoreOfTeamTwo == 4)
             return "Deuce";
-        if (m_score1 >= 4 || m_score2 >= 4) {
-            if (Math.abs(m_score1 - m_score2)  == 1)
-                return "Advantage " + (m_score1 > m_score2 ? firstTeamName : secondTeamName);
-            return "Win for " + (m_score1 > m_score2 ? firstTeamName : secondTeamName);
+        if (scoreOfTeamOne >= 4 || scoreOfTeamTwo >= 4) {
+            if (Math.abs(scoreOfTeamOne - scoreOfTeamTwo)  == 1)
+                return "Advantage " + (scoreOfTeamOne > scoreOfTeamTwo ? teamOne : teamTwo);
+            return "Win for " + (scoreOfTeamOne > scoreOfTeamTwo ? teamOne : teamTwo);
         }
-        if (m_score1 == m_score2)
-            return SCORE_NAMES[m_score1] + "-All";
-        return SCORE_NAMES[m_score1] + "-" + SCORE_NAMES[m_score2];
+        if (scoreOfTeamOne == scoreOfTeamTwo)
+            return SCORE_NAMES[scoreOfTeamOne] + "-All";
+        return SCORE_NAMES[scoreOfTeamOne] + "-" + SCORE_NAMES[scoreOfTeamTwo];
 
 
     }
