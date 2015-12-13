@@ -28,11 +28,9 @@ public class TennisGame1 implements TennisGame {
             return "Deuce";
         if (m_score1 >= 4 || m_score2 >= 4) {
             int minusResult = m_score1 - m_score2;
-
-            if (minusResult == 1) return "Advantage player1";
-            else if (minusResult == -1) return "Advantage player2";
-            else if (minusResult >= 2) return "Win for player1";
-            return "Win for player2";
+            if (Math.abs(minusResult)  == 1)
+                return "Advantage " + (m_score1 > m_score2 ? player1Name : player2Name);
+            return "Win for " + (m_score1 > m_score2 ? player1Name : player2Name);
         }
         if (m_score1 == m_score2)
             return SCORE_NAMES[m_score1] + "-All";
