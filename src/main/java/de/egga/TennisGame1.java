@@ -27,8 +27,7 @@ public class TennisGame1 implements TennisGame {
         if (m_score1 == 3 && m_score2 == 3 || m_score1 == 4 && m_score2 == 4)
             return "Deuce";
         if (m_score1 >= 4 || m_score2 >= 4) {
-            int minusResult = m_score1 - m_score2;
-            if (Math.abs(minusResult)  == 1)
+            if (Math.abs(m_score1 - m_score2)  == 1)
                 return "Advantage " + (m_score1 > m_score2 ? player1Name : player2Name);
             return "Win for " + (m_score1 > m_score2 ? player1Name : player2Name);
         }
