@@ -11,7 +11,7 @@ public class TennisGame1 implements TennisGame {
             this.score = score;
         }
 
-        static Team addScore(Team team){
+        static Team addPoint(Team team){
             return new Team(team.name, team.score + 1);
         }
 
@@ -39,29 +39,38 @@ public class TennisGame1 implements TennisGame {
         public Game wonPoint(String playerName) {
 
             if (one.name.equals(playerName))
-                return new Game(Team.addScore(one), two);
+                return new Game(Team.addPoint(one), two);
             else
-                return new Game(one, Team.addScore(two));
+                return new Game(one, Team.addPoint(two));
         }
 
         public String getScore() {
 
-            if (one.score == 3 && two.score == 3 || one.score == 4 && two.score == 4)
+            if (isDraft() && ( one.score == 3 || one.score == 4 ))
                 return "Deuce";
-            if (one.score >= 4 || two.score >= 4) {
+            if (inEndphase()) {
                 if (Math.abs(one.score - two.score)  == 1)
                     return "Advantage " + (one.score > two.score ? one.name : two.name);
                 return "Win for " + (one.score > two.score ? one.name : two.name);
             }
-            if (one.score == two.score)
+            if (isDraft())
                 return SCORE_NAMES[one.score] + "-All";
             return SCORE_NAMES[one.score] + "-" + SCORE_NAMES[two.score];
 
 
         }
 
+        private boolean isDraft() {
+            return one.score == two.score;
+        }
+
+        private boolean inEndphase() {
+            return one.score >= 4 || two.score >= 4;
+        }
+
 
     }
+
 
     private Game game;
 
@@ -72,6 +81,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public void wonPoint(String playerName) {
+        //I hate those tests ...
         game = game.wonPoint(playerName);
 
     }
