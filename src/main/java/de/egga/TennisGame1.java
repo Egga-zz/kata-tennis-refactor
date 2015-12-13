@@ -4,22 +4,22 @@ public class TennisGame1 implements TennisGame {
 
     private int m_score1 = 0;
     private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+    private final String firstTeamName;
+    private final String secondTeamName;
 
     private final String[] SCORE_NAMES = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
 
 
-    public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+    public TennisGame1(String firstTeamName, String secondTeamName) {
+        this.firstTeamName = firstTeamName;
+        this.secondTeamName = secondTeamName;
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == player1Name)
-            m_score1 += 1;
+        if (firstTeamName.equals(playerName))
+            m_score1++;
         else
-            m_score2 += 1;
+            m_score2++;
     }
 
     public String getScore() {
@@ -28,8 +28,8 @@ public class TennisGame1 implements TennisGame {
             return "Deuce";
         if (m_score1 >= 4 || m_score2 >= 4) {
             if (Math.abs(m_score1 - m_score2)  == 1)
-                return "Advantage " + (m_score1 > m_score2 ? player1Name : player2Name);
-            return "Win for " + (m_score1 > m_score2 ? player1Name : player2Name);
+                return "Advantage " + (m_score1 > m_score2 ? firstTeamName : secondTeamName);
+            return "Win for " + (m_score1 > m_score2 ? firstTeamName : secondTeamName);
         }
         if (m_score1 == m_score2)
             return SCORE_NAMES[m_score1] + "-All";
