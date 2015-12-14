@@ -22,6 +22,8 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score;
+        Player player1 = this.player1;
+        Player player2 = this.player2;
         if (player1.getScore() == player2.getScore()) {
             score = getSubScore();
         } else if (hasAnyPlayerEnoughPointsToWin()) {
