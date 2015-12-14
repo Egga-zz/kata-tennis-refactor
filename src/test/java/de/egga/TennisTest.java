@@ -14,8 +14,8 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class TennisTest {
 
-    private static final String PLAYER1 = "player1";
-    private static final String PLAYER2 = "player2";
+    private static final String PLAYER1 = "Player1";
+    private static final String PLAYER2 = "Player20";
     private int player1Score;
     private int player2Score;
     private String expectedScore;
@@ -87,16 +87,5 @@ public class TennisTest {
         checkAllScores(game);
     }
 
-    @Test
-    public void checkAllScoresTennisGame2() {
-        TennisGame2 game = new TennisGame2(PLAYER1, PLAYER2);
-        checkAllScores(game);
-    }
-
-    @Test
-    public void checkAllScoresTennisGame3() {
-        TennisGame3 game = new TennisGame3(PLAYER1, PLAYER2);
-        checkAllScores(game);
-    }
 
 }

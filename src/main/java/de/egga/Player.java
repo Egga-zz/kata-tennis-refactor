@@ -24,4 +24,8 @@ public class Player {
     public boolean isCalled(String name) {
         return this.name.equals(name);
     }
+
+    public String getName() {
+        return name;
+    }
 }
