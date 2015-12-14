@@ -22,7 +22,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score;
-        if (isDraw()) {
+        if (player1.getScore() == player2.getScore()) {
             score = getSubScore();
         } else if (hasAnyPlayerEnoughPointsToWin()) {
             score = getMainScore();
@@ -34,10 +34,6 @@ public class TennisGame1 implements TennisGame {
 
     private boolean hasAnyPlayerEnoughPointsToWin() {
         return player1.hasEnoughPointsToWin() || player2.hasEnoughPointsToWin();
-    }
-
-    private boolean isDraw() {
-        return player1.getScore() == player2.getScore();
     }
 
     private String getOtherScore() {
