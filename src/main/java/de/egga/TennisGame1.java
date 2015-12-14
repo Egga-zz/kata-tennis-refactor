@@ -78,23 +78,9 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getSubScore() {
-        String score;
 
         List<String> spokenScore = asList("Love-All", "Fifteen-All", "Thirty-All", "Deuce");
-        switch (player1.getScore()) {
-            case 0:
-                score = "Love-All";
-                break;
-            case 1:
-                score = "Fifteen-All";
-                break;
-            case 2:
-                score = "Thirty-All";
-                break;
-            default:
-                score = "Deuce";
-                break;
-        }
+
         int score2 = player1.getScore();
         if (score2 >= spokenScore.size()) {
             score2 = spokenScore.size() - 1;
