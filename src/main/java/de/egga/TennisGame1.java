@@ -2,12 +2,12 @@ package de.egga;
 
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
+    private final Player player1 = new Player();
     private int m_score2 = 0;
 
     public void wonPoint(String playerName) {
         if (playerName.equals("player1")) {
-            addScore1();
+            player1.addPoint();
         } else {
             addScore2();
         }
@@ -15,10 +15,6 @@ public class TennisGame1 implements TennisGame {
 
     private void addScore2() {
         m_score2 += 1;
-    }
-
-    private void addScore1() {
-        m_score1 += 1;
     }
 
     public String getScore() {
@@ -34,11 +30,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean hasAnyPlayerEnoughPointsToWin() {
-        return hasEnoughPointsToWin(getM_score1()) || hasEnoughPointsToWin(getM_score2());
-    }
-
-    private int getM_score1() {
-        return this.m_score1;
+        return hasEnoughPointsToWin(player1.getScore()) || hasEnoughPointsToWin(getM_score2());
     }
 
     private boolean hasEnoughPointsToWin(int m_score1) {
@@ -46,11 +38,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isDraw() {
-        return getM_score1() == getM_score2();
+        return player1.getScore() == getM_score2();
     }
 
     private String getOtherScore() {
-        String score = getSuffix(getM_score1());
+        String score = getSuffix(player1.getScore());
         score += "-";
         score += getSuffix(getM_score2());
 
@@ -78,7 +70,7 @@ public class TennisGame1 implements TennisGame {
 
     private String getMainScore() {
         String score;
-        int minusResult = getM_score1() - getM_score2();
+        int minusResult = player1.getScore() - getM_score2();
         if (minusResult == 1) score = "Advantage player1";
         else if (minusResult == -1) score = "Advantage player2";
         else if (minusResult >= 2) score = "Win for player1";
@@ -92,7 +84,7 @@ public class TennisGame1 implements TennisGame {
 
     private String getSubScore() {
         String score;
-        switch (getM_score1()) {
+        switch (player1.getScore()) {
             case 0:
                 score = "Love-All";
                 break;
