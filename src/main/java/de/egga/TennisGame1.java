@@ -9,12 +9,8 @@ public class TennisGame1 implements TennisGame {
         if (playerName.equals("player1")) {
             player1.addPoint();
         } else {
-            addScore2();
+            player2.addPoint();
         }
-    }
-
-    private void addScore2() {
-        player2.addPoint();
     }
 
     public String getScore() {
