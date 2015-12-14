@@ -2,6 +2,7 @@ package de.egga;
 
 import java.util.List;
 
+import static java.lang.Math.abs;
 import static java.util.Arrays.asList;
 
 public class TennisGame1 implements TennisGame {
@@ -68,21 +69,22 @@ public class TennisGame1 implements TennisGame {
     }
 
     private String getSpokenScoreInFinalPhase() {
-        String score;
-        Player betterPlayer;
-        int difference = player1.getScore() - player2.getScore();
-        if (difference > 0) {
-            betterPlayer = player1;
+        Player betterPlayer = findBetterPlayer(player1, player2);
+        int delta = abs(player1.getScore() - player2.getScore());
+        if (delta == 1) {
+            return  "Advantage " + betterPlayer.getName();
         } else {
-            betterPlayer = player2;
+            return  "Win for " + betterPlayer.getName();
         }
-        if (Math.abs(difference) == 1) {
-            score = "Advantage " + betterPlayer.getName();
-        } else {
-            score = "Win for " + betterPlayer.getName();
-        }
+    }
 
-        return score;
+    private Player findBetterPlayer(Player player1, Player player2) {
+        int difference= player1.getScore() - player2.getScore();
+        if (difference > 0) {
+             return player1;
+        } else {
+            return player2;
+        }
     }
 
     private String getSpokenScoreInCaseOfDraw() {
