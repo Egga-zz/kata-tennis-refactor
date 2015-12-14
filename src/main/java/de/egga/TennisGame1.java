@@ -17,8 +17,6 @@ public class TennisGame1 implements TennisGame {
         static Team addPoint(Team team) {
             return new Team(team.name, team.score + 1);
         }
-
-
     }
 
     private class GamePart {
@@ -48,10 +46,9 @@ public class TennisGame1 implements TennisGame {
         }
 
         public String getScore() {
-
-            if (isDraft() && (home.score == 3 || home.score >= 4))
-                return "Deuce";
             if (inEndphase()) {
+                if (isDraft())
+                    return "Deuce";
                 String inFavourOf = home.score > guest.score ? home.name : guest.name;
                 if (Math.abs(home.score - guest.score) == 1)
                     return "Advantage " + inFavourOf;
@@ -69,7 +66,7 @@ public class TennisGame1 implements TennisGame {
         }
 
         private boolean inEndphase() {
-            return home.score >= 4 || guest.score >= 4;
+            return home.score >= 4 || guest.score >= 4 || (home.score & guest.score) == 3;
         }
     }
 
@@ -91,7 +88,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        rounds.stream().forEach(s -> System.out.println(s.getScore()));
+        //rounds.stream().forEach(s -> System.out.println(s.getScore()));
         return getTail().getScore();
     }
 }
