@@ -19,7 +19,4 @@ public class Player {
         return score >= 4;
     }
 
-    public static boolean hasEnoughPointsToWin(Player player) {
-        return player.hasEnoughPointsToWin();
-    }
 }
