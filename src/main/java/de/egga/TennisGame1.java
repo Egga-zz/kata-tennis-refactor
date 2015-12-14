@@ -32,7 +32,7 @@ public class TennisGame1 implements TennisGame {
         } else if (hasAnyPlayerEnoughPointsToWin()) {
             score = getSpokenScoreInFinalPhase();
         } else {
-            score = getOtherScore();
+            score = getSpokenScoreInStartingPhase();
         }
         return score;
     }
@@ -41,17 +41,13 @@ public class TennisGame1 implements TennisGame {
         return player1.hasEnoughPointsToWin() || player2.hasEnoughPointsToWin();
     }
 
-    private String getOtherScore() {
-        String score = getSuffix(player1.getScore());
-        score += "-";
-        score += getSuffix(player2.getScore());
-
-        return score;
+    private String getSpokenScoreInStartingPhase() {
+        return getSpokenScoreOfSinglePlayer(player1) + "-" + getSpokenScoreOfSinglePlayer(player2);
     }
 
-    private String getSuffix(int tempScore) {
+    private String getSpokenScoreOfSinglePlayer(Player player) {
         String score = "";
-        switch (tempScore) {
+        switch (player.getScore()) {
             case 0:
                 score += "Love";
                 break;
@@ -72,16 +68,16 @@ public class TennisGame1 implements TennisGame {
         Player betterPlayer = findBetterPlayer(player1, player2);
         int delta = abs(player1.getScore() - player2.getScore());
         if (delta == 1) {
-            return  "Advantage " + betterPlayer.getName();
+            return "Advantage " + betterPlayer.getName();
         } else {
-            return  "Win for " + betterPlayer.getName();
+            return "Win for " + betterPlayer.getName();
         }
     }
 
     private Player findBetterPlayer(Player player1, Player player2) {
-        int difference= player1.getScore() - player2.getScore();
+        int difference = player1.getScore() - player2.getScore();
         if (difference > 0) {
-             return player1;
+            return player1;
         } else {
             return player2;
         }
