@@ -1,5 +1,9 @@
 package de.egga;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
 public class TennisGame1 implements TennisGame {
 
     private final Player player1 ;
@@ -75,6 +79,9 @@ public class TennisGame1 implements TennisGame {
 
     private String getSubScore() {
         String score;
+
+        List<String> spokenScore = asList("Love-All", "Fifteen-All", "Thirty-All", "Deuce");
+
         switch (player1.getScore()) {
             case 0:
                 score = "Love-All";
