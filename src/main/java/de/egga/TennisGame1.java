@@ -6,8 +6,8 @@ import static java.util.Arrays.asList;
 
 public class TennisGame1 implements TennisGame {
 
-    private final Player player1 ;
-    private final Player player2 ;
+    private final Player player1;
+    private final Player player2;
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1 = new Player(player1Name);
@@ -81,7 +81,6 @@ public class TennisGame1 implements TennisGame {
         String score;
 
         List<String> spokenScore = asList("Love-All", "Fifteen-All", "Thirty-All", "Deuce");
-
         switch (player1.getScore()) {
             case 0:
                 score = "Love-All";
@@ -96,6 +95,10 @@ public class TennisGame1 implements TennisGame {
                 score = "Deuce";
                 break;
         }
-        return score;
+        int score2 = player1.getScore();
+        if (score2 >= spokenScore.size()) {
+            score2 = spokenScore.size() - 1;
+        }
+        return spokenScore.get(score2);
     }
 }
