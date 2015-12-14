@@ -13,10 +13,6 @@ public class Player {
         return score == player2.getScore();
     }
 
-    static boolean isaBoolean(Player player1, Player player2) {
-        return player1.isaBoolean(player2);
-    }
-
     void addPoint() {
         score += 1;
     }
