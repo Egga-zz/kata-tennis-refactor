@@ -9,8 +9,12 @@ public class Player {
         this.name = name;
     }
 
+    public boolean isaBoolean(Player player2) {
+        return score == player2.getScore();
+    }
+
     static boolean isaBoolean(Player player1, Player player2) {
-        return player1.getScore() == player2.getScore();
+        return player1.isaBoolean(player2);
     }
 
     void addPoint() {
