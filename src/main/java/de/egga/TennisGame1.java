@@ -27,9 +27,9 @@ public class TennisGame1 implements TennisGame {
     public String getScore() {
         String score;
         if (player1.hasSameScoreAs(player2)) {
-            score = getSubScore();
+            score = getSpokenScoreInCaseOfDraw();
         } else if (hasAnyPlayerEnoughPointsToWin()) {
-            score = getMainScore();
+            score = getSpokenScoreInFinalPhase();
         } else {
             score = getOtherScore();
         }
@@ -67,24 +67,30 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
-    private String getMainScore() {
+    private String getSpokenScoreInFinalPhase() {
         String score;
-        int minusResult = player1.getScore() - player2.getScore();
-        if (minusResult == 1) score = "Advantage " + player1.getName();
-        else if (minusResult == -1) score = "Advantage " + player2.getName();
-        else if (minusResult >= 2) score = "Win for " + player1.getName();
-        else score = "Win for " + player2.getName();
+        Player betterPlayer;
+        int difference = player1.getScore() - player2.getScore();
+        if (difference > 0) {
+            betterPlayer = player1;
+        } else {
+            betterPlayer = player2;
+        }
+        if (Math.abs(difference) == 1) {
+            score = "Advantage " + betterPlayer.getName();
+        } else {
+            score = "Win for " + betterPlayer.getName();
+        }
+
         return score;
     }
 
-    private String getSubScore() {
-
+    private String getSpokenScoreInCaseOfDraw() {
         List<String> spokenScore = asList("Love-All", "Fifteen-All", "Thirty-All", "Deuce");
-
-        int score2 = player1.getScore();
-        if (score2 >= spokenScore.size()) {
-            score2 = spokenScore.size() - 1;
+        int score = player1.getScore();
+        if (score >= spokenScore.size()) {
+            score = spokenScore.size() - 1;
         }
-        return spokenScore.get(score2);
+        return spokenScore.get(score);
     }
 }
