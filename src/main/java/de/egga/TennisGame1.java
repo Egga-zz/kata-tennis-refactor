@@ -32,7 +32,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean hasAnyPlayerEnoughPointsToWin() {
-        return hasEnoughPointsToWin(player1.getScore()) || hasEnoughPointsToWin(getM_score2());
+        return hasEnoughPointsToWin(player1.getScore()) || hasEnoughPointsToWin(player2.getScore());
     }
 
     private boolean hasEnoughPointsToWin(int m_score1) {
@@ -40,13 +40,13 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isDraw() {
-        return player1.getScore() == getM_score2();
+        return player1.getScore() == player2.getScore();
     }
 
     private String getOtherScore() {
         String score = getSuffix(player1.getScore());
         score += "-";
-        score += getSuffix(getM_score2());
+        score += getSuffix(player2.getScore());
 
         return score;
     }
@@ -72,16 +72,12 @@ public class TennisGame1 implements TennisGame {
 
     private String getMainScore() {
         String score;
-        int minusResult = player1.getScore() - getM_score2();
+        int minusResult = player1.getScore() - player2.getScore();
         if (minusResult == 1) score = "Advantage player1";
         else if (minusResult == -1) score = "Advantage player2";
         else if (minusResult >= 2) score = "Win for player1";
         else score = "Win for player2";
         return score;
-    }
-
-    private int getM_score2() {
-        return player2.getScore();
     }
 
     private String getSubScore() {
