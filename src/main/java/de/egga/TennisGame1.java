@@ -33,13 +33,14 @@ public class TennisGame1 implements TennisGame {
                 score += "-";
                 tempScore = m_score2;
             }
+            score += getSuffix(tempScore);
 
-            score = getSuffix(score, tempScore);
         }
         return score;
     }
 
-    private String getSuffix(String score, int tempScore) {
+    private String getSuffix(int tempScore) {
+        String score = "";
         switch (tempScore) {
             case 0:
                 score += "Love";
