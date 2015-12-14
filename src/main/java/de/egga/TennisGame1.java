@@ -2,8 +2,13 @@ package de.egga;
 
 public class TennisGame1 implements TennisGame {
 
-    private final Player player1 = new Player();
-    private final Player player2 = new Player();
+    private final Player player1 ;
+    private final Player player2 ;
+
+    public TennisGame1(String player1Name, String player2Name) {
+        this.player1 = new Player(player1Name);
+        this.player2 = new Player(player2Name);
+    }
 
     public void wonPoint(String playerName) {
         if (playerName.equals("player1")) {

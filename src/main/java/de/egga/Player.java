@@ -3,8 +3,10 @@ package de.egga;
 public class Player {
 
     int score = 0;
+    final String name;
 
-    public Player() {
+    public Player(String name) {
+        this.name = name;
     }
 
     void addPoint() {
