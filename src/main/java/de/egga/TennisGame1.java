@@ -24,7 +24,7 @@ public class TennisGame1 implements TennisGame {
         String score;
         Player player1 = this.player1;
         Player player2 = this.player2;
-        if (player1.getScore() == player2.getScore()) {
+        if (isaBoolean(player1, player2)) {
             score = getSubScore();
         } else if (hasAnyPlayerEnoughPointsToWin()) {
             score = getMainScore();
@@ -32,6 +32,10 @@ public class TennisGame1 implements TennisGame {
             score = getOtherScore();
         }
         return score;
+    }
+
+    private boolean isaBoolean(Player player1, Player player2) {
+        return player1.getScore() == player2.getScore();
     }
 
     private boolean hasAnyPlayerEnoughPointsToWin() {
