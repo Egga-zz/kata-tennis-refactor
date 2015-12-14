@@ -26,7 +26,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean hasAnyPlayerEnoughPointsToWin() {
-        return Player.hasEnoughPointsToWin(player1) || Player.hasEnoughPointsToWin(player2.getScore());
+        return Player.hasEnoughPointsToWin(player1) || Player.hasEnoughPointsToWin(player2);
     }
 
     private boolean isDraw() {
