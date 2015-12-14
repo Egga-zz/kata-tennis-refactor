@@ -1,8 +1,11 @@
 package de.egga;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TennisGame1 implements TennisGame {
 
-    private static class Team{
+    private static class Team {
         private final String name;
         private final int score;
 
@@ -11,83 +14,84 @@ public class TennisGame1 implements TennisGame {
             this.score = score;
         }
 
-        static Team addPoint(Team team){
+        static Team addPoint(Team team) {
             return new Team(team.name, team.score + 1);
         }
 
 
     }
 
-    private class Game{
-        private final Team one;
-        private final Team two;
+    private class GamePart {
+        private final Team home;
+        private final Team guest;
 
-        public Game(String nameOfTeamOne, String nameOfTeamTwo) {
-            one = new Team(nameOfTeamOne, 0);
-            two = new Team(nameOfTeamTwo, 0);
+        public GamePart(String nameOfTeamOne, String nameOfTeamTwo) {
+            home = new Team(nameOfTeamOne, 0);
+            guest = new Team(nameOfTeamTwo, 0);
         }
 
-        private Game(Team one, Team two) {
-            this.one = one;
-            this.two = two;
+        private GamePart(Team home, Team guest) {
+            this.home = home;
+            this.guest = guest;
         }
-        
+
 
         private final String[] SCORE_NAMES = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
 
 
-        public Game wonPoint(String playerName) {
+        public GamePart wonPoint(String playerName) {
 
-            if (one.name.equals(playerName))
-                return new Game(Team.addPoint(one), two);
+            if (home.name.equals(playerName))
+                return new GamePart(Team.addPoint(home), guest);
             else
-                return new Game(one, Team.addPoint(two));
+                return new GamePart(home, Team.addPoint(guest));
         }
 
         public String getScore() {
 
-            if (isDraft() && ( one.score == 3 || one.score == 4 ))
+            if (isDraft() && (home.score == 3 || home.score == 4))
                 return "Deuce";
             if (inEndphase()) {
-                if (Math.abs(one.score - two.score)  == 1)
-                    return "Advantage " + (one.score > two.score ? one.name : two.name);
-                return "Win for " + (one.score > two.score ? one.name : two.name);
+                String inFavourOf = home.score > guest.score ? home.name : guest.name;
+                if (Math.abs(home.score - guest.score) == 1)
+                    return "Advantage " + inFavourOf;
+                return "Win for " + inFavourOf;
             }
             if (isDraft())
-                return SCORE_NAMES[one.score] + "-All";
-            return SCORE_NAMES[one.score] + "-" + SCORE_NAMES[two.score];
+                return SCORE_NAMES[home.score] + "-All";
+            return SCORE_NAMES[home.score] + "-" + SCORE_NAMES[guest.score];
 
 
         }
 
         private boolean isDraft() {
-            return one.score == two.score;
+            return home.score == guest.score;
         }
 
         private boolean inEndphase() {
-            return one.score >= 4 || two.score >= 4;
+            return home.score >= 4 || guest.score >= 4;
         }
-
-
     }
 
 
-    private Game game;
+
+    private List<GamePart> rounds = new ArrayList<>();
 
 
     public TennisGame1(String teamOne, String teamTwo) {
-        game = new Game(teamOne, teamTwo);
-
+        rounds.add(new GamePart(teamOne, teamTwo));
     }
 
     public void wonPoint(String playerName) {
-        //I hate those tests ...
-        game = game.wonPoint(playerName);
+        rounds.add(getTail().wonPoint(playerName));
+    }
 
+    private GamePart getTail() {
+        return rounds.get(rounds.size() - 1);
     }
 
     public String getScore() {
-        return game.getScore();
-
+        //rounds.stream().forEach(s -> System.out.println(s.getScore()));
+        return getTail().getScore();
     }
 }
