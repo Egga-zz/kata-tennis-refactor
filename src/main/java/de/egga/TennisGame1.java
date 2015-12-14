@@ -14,7 +14,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        String score = "";
+        String score;
         if (isDraw()) {
             score = getSubScore();
         } else if (hasAnyPlayerEnoughPointsToWin()) {
