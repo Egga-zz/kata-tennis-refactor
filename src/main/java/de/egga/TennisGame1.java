@@ -14,14 +14,26 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score = "";
-        if (m_score1 == m_score2) {
+        if (isDraw()) {
             score = getSubScore();
-        } else if (m_score1 >= 4 || m_score2 >= 4) {
+        } else if (hasAnyPlayerEnoughPointsToWin()) {
             score = getMainScore();
         } else {
             score = getOtherScore(score);
         }
         return score;
+    }
+
+    private boolean hasAnyPlayerEnoughPointsToWin() {
+        return hasEnoughPointsToWin(this.m_score1) || hasEnoughPointsToWin(this.m_score2);
+    }
+
+    private boolean hasEnoughPointsToWin(int m_score1) {
+        return m_score1 >= 4;
+    }
+
+    private boolean isDraw() {
+        return m_score1 == m_score2;
     }
 
     private String getOtherScore(String score) {
