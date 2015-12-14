@@ -29,7 +29,7 @@ public class TennisGame1 implements TennisGame {
         return hasEnoughPointsToWin(player1.getScore()) || hasEnoughPointsToWin(player2.getScore());
     }
 
-    private boolean hasEnoughPointsToWin(int m_score1) {
+    private static boolean hasEnoughPointsToWin(int m_score1) {
         return m_score1 >= 4;
     }
 
