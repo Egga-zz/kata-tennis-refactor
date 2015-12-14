@@ -7,10 +7,18 @@ public class TennisGame1 implements TennisGame {
 
     public void wonPoint(String playerName) {
         if (playerName.equals("player1")) {
-            m_score1 += 1;
+            addScore1();
         } else {
-            m_score2 += 1;
+            addScore2();
         }
+    }
+
+    private void addScore2() {
+        m_score2 += 1;
+    }
+
+    private void addScore1() {
+        m_score1 += 1;
     }
 
     public String getScore() {
@@ -26,7 +34,11 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean hasAnyPlayerEnoughPointsToWin() {
-        return hasEnoughPointsToWin(this.m_score1) || hasEnoughPointsToWin(this.m_score2);
+        return hasEnoughPointsToWin(getM_score1()) || hasEnoughPointsToWin(getM_score2());
+    }
+
+    private int getM_score1() {
+        return this.m_score1;
     }
 
     private boolean hasEnoughPointsToWin(int m_score1) {
@@ -34,13 +46,13 @@ public class TennisGame1 implements TennisGame {
     }
 
     private boolean isDraw() {
-        return m_score1 == m_score2;
+        return getM_score1() == getM_score2();
     }
 
     private String getOtherScore() {
-        String score = getSuffix(m_score1);
+        String score = getSuffix(getM_score1());
         score += "-";
-        score += getSuffix(m_score2);
+        score += getSuffix(getM_score2());
 
         return score;
     }
@@ -66,7 +78,7 @@ public class TennisGame1 implements TennisGame {
 
     private String getMainScore() {
         String score;
-        int minusResult = m_score1 - m_score2;
+        int minusResult = getM_score1() - getM_score2();
         if (minusResult == 1) score = "Advantage player1";
         else if (minusResult == -1) score = "Advantage player2";
         else if (minusResult >= 2) score = "Win for player1";
@@ -74,9 +86,13 @@ public class TennisGame1 implements TennisGame {
         return score;
     }
 
+    private int getM_score2() {
+        return m_score2;
+    }
+
     private String getSubScore() {
         String score;
-        switch (m_score1) {
+        switch (getM_score1()) {
             case 0:
                 score = "Love-All";
                 break;
