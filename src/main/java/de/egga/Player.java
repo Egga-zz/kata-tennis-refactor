@@ -9,7 +9,7 @@ public class Player {
         this.name = name;
     }
 
-    public boolean isaBoolean(Player player2) {
+    public boolean hasSameScoreAs(Player player2) {
         return score == player2.getScore();
     }
 

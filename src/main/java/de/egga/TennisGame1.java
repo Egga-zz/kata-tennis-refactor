@@ -22,7 +22,7 @@ public class TennisGame1 implements TennisGame {
 
     public String getScore() {
         String score;
-        if (player1.isaBoolean(player2)) {
+        if (player1.hasSameScoreAs(player2)) {
             score = getSubScore();
         } else if (hasAnyPlayerEnoughPointsToWin()) {
             score = getMainScore();
