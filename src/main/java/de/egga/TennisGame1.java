@@ -19,7 +19,7 @@ public class TennisGame1 implements TennisGame {
         } else if (hasAnyPlayerEnoughPointsToWin()) {
             score = getMainScore();
         } else {
-            score = getOtherScore(score);
+            score = getOtherScore();
         }
         return score;
     }
@@ -36,8 +36,8 @@ public class TennisGame1 implements TennisGame {
         return m_score1 == m_score2;
     }
 
-    private String getOtherScore(String score) {
-        score += getSuffix(m_score1);
+    private String getOtherScore() {
+        String score = getSuffix(m_score1);
         score += "-";
         score += getSuffix(m_score2);
 
