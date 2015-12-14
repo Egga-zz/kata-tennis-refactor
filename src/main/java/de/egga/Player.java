@@ -21,4 +21,7 @@ public class Player {
         return score >= 4;
     }
 
+    public boolean isCalled(String name) {
+        return this.name.equals(name);
+    }
 }
