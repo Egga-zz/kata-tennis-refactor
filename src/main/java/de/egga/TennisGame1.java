@@ -26,16 +26,12 @@ public class TennisGame1 implements TennisGame {
 
     private String getOtherScore(String score) {
         int tempScore;
-        for (   int i = 1; i < 3; i++) {
-            if (i == 1) {
-                tempScore = m_score1;
-            } else {
-                score += "-";
-                tempScore = m_score2;
-            }
-            score += getSuffix(tempScore);
+        tempScore = m_score1;
+        score += getSuffix(tempScore);
+        score += "-";
+        tempScore = m_score2;
+        score += getSuffix(tempScore);
 
-        }
         return score;
     }
 
