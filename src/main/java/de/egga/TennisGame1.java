@@ -49,7 +49,7 @@ public class TennisGame1 implements TennisGame {
 
         public String getScore() {
 
-            if (isDraft() && (home.score == 3 || home.score == 4))
+            if (isDraft() && (home.score == 3 || home.score >= 4))
                 return "Deuce";
             if (inEndphase()) {
                 String inFavourOf = home.score > guest.score ? home.name : guest.name;
@@ -91,7 +91,7 @@ public class TennisGame1 implements TennisGame {
     }
 
     public String getScore() {
-        //rounds.stream().forEach(s -> System.out.println(s.getScore()));
+        rounds.stream().forEach(s -> System.out.println(s.getScore()));
         return getTail().getScore();
     }
 }

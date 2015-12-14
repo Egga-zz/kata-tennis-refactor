@@ -65,6 +65,7 @@ public class TennisTest {
                 { 4, 6, "Win for player2"},
                 { 16, 14, "Win for player1"},
                 { 14, 16, "Win for player2"},
+                { 16, 16, "Deuce"}
         });
     }
 
