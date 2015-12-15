@@ -1,77 +1,93 @@
 package de.egga;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
-    private int m_score2 = 0;
-    private String player1Name;
-    private String player2Name;
+    public static final String DEUCE = "Deuce";
+
+    private final String firstPlayerName;
+
+    private final String secondPlayerName;
+
+    public static final String ADVANTAGE_FORMAT = "Advantage %s";
+
+    public static final String WIN_FORMAT = "Win for %s";
+
+    private int firstPlayerScore = 0;
+
+    private int secondPlayerScore = 0;
+
+    private static final Map<Integer, String> SCORE_MAP = new HashMap<Integer, String>() {{
+        put(0, "Love");
+        put(1, "Fifteen");
+        put(2, "Thirty");
+        put(3, "Forty");
+    }};
 
     public TennisGame1(String player1Name, String player2Name) {
-        this.player1Name = player1Name;
-        this.player2Name = player2Name;
+
+        this.firstPlayerName = player1Name;
+        this.secondPlayerName = player2Name;
     }
 
+    @Override
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            m_score1 += 1;
-        else
-            m_score2 += 1;
+
+        if (playerName.equals(firstPlayerName)) {
+            firstPlayerScore++;
+        } else if (playerName.equals(secondPlayerName)) {
+            secondPlayerScore++;
+        } else {
+            throw new IllegalArgumentException("Player " + playerName + " is not playing in this game");
+        }
     }
 
+    @Override
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
-        {
-            switch (m_score1)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
 
-            }
+        if (isBeforeFirstDeuce()) {
+            return getScoreBeforeFirstDeuce();
+        } else {
+            return getScoreAfterFirstDeuce();
         }
-        else if (m_score1>=4 || m_score2>=4)
-        {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+    }
+
+    private boolean isBeforeFirstDeuce() {
+
+        return firstPlayerScore < 4 && secondPlayerScore < 4 && (firstPlayerScore + secondPlayerScore < 6);
+    }
+
+    private String getScoreBeforeFirstDeuce() {
+
+        return getScoreForOnePlayerUnderFourPoints(firstPlayerScore) + "-" + (firstPlayerScore == secondPlayerScore ?
+                                                                              "All" :
+                                                                              getScoreForOnePlayerUnderFourPoints(
+                                                                                      secondPlayerScore          ));
+    }
+
+    private String getScoreForOnePlayerUnderFourPoints(final int playerScore) {
+
+        return SCORE_MAP.get(playerScore);
+    }
+
+    private String getScoreAfterFirstDeuce() {
+
+        int scoreDifference = firstPlayerScore - secondPlayerScore;
+
+        if (scoreDifference == 0) {
+            return DEUCE;
         }
-        else
-        {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
+        if (scoreDifference == 1) {
+            return String.format(ADVANTAGE_FORMAT, firstPlayerName);
         }
-        return score;
+        if (scoreDifference == -1) {
+            return String.format(ADVANTAGE_FORMAT, secondPlayerName);
+        }
+        if (scoreDifference >= 2) {
+            return String.format(WIN_FORMAT, firstPlayerName);
+        }
+        return String.format(WIN_FORMAT, secondPlayerName);
     }
 }
