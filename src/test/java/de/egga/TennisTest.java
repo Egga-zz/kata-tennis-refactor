@@ -1,6 +1,8 @@
 package de.egga;
 
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -8,8 +10,6 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Arrays;
 import java.util.Collection;
-
-import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class TennisTest {
@@ -61,7 +61,9 @@ public class TennisTest {
                 { 15, 14, "Advantage player1"},
                 { 14, 15, "Advantage player2"},
 
+                { 5, 3, "Win for player1"},
                 { 6, 4, "Win for player1"},
+                { 3, 5, "Win for player2"},
                 { 4, 6, "Win for player2"},
                 { 16, 14, "Win for player1"},
                 { 14, 16, "Win for player2"},

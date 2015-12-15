@@ -1,76 +1,92 @@
 package de.egga;
 
+import java.util.HashMap;
+
 public class TennisGame1 implements TennisGame {
 
-    private int m_score1 = 0;
-    private int m_score2 = 0;
+
     private String player1Name;
     private String player2Name;
+    private ScoredPoints m_score = new ScoredPoints();
+
+    private HashMap scoreNames = new HashMap<Integer, String>();
+
+    private class ScoredPoints{
+        private int m_score1;
+        private int m_score2;
+        public void ScoredPoints(){
+            m_score1 = 0;
+            m_score2 = 0;
+        }
+
+        void add(int playerNumber, int result){
+            if(playerNumber == 1) m_score1 += result;
+            else  m_score2 += result;
+        }
+
+        int get(int playerNumber){
+            if(playerNumber == 1) return m_score1;
+            else return m_score2;
+        }
+
+        int getDifference()
+        {
+            return m_score1 - m_score2;
+        }
+
+        boolean isEqual()
+        {
+            return getDifference() == 0;
+        }
+
+        boolean isPlayer1Better(){
+            return getDifference() > 0;
+        }
+
+    }
+
 
     public TennisGame1(String player1Name, String player2Name) {
         this.player1Name = player1Name;
         this.player2Name = player2Name;
+
+        scoreNames.put(0, "Love");
+        scoreNames.put(1, "Fifteen");
+        scoreNames.put(2, "Thirty");
+        scoreNames.put(3, "Forty");
     }
 
     public void wonPoint(String playerName) {
-        if (playerName == "player1")
-            m_score1 += 1;
+        if (playerName == player1Name)
+            m_score.add(1,1);
         else
-            m_score2 += 1;
+            m_score.add(2,1);
     }
 
     public String getScore() {
-        String score = "";
-        int tempScore=0;
-        if (m_score1==m_score2)
+        String score;
+        if (m_score.isEqual())
         {
-            switch (m_score1)
-            {
-                case 0:
-                    score = "Love-All";
-                    break;
-                case 1:
-                    score = "Fifteen-All";
-                    break;
-                case 2:
-                    score = "Thirty-All";
-                    break;
-                default:
-                    score = "Deuce";
-                    break;
-
-            }
+            int equalScore = m_score.get(1);
+            if(equalScore > 2) score = "Deuce";
+            else score = scoreNames.get(equalScore) + "-All";
         }
-        else if (m_score1>=4 || m_score2>=4)
+        else if (m_score.get(1)>=4 || m_score.get(2)>=4)
         {
-            int minusResult = m_score1-m_score2;
-            if (minusResult==1) score ="Advantage player1";
-            else if (minusResult ==-1) score ="Advantage player2";
-            else if (minusResult>=2) score = "Win for player1";
-            else score ="Win for player2";
+            int minusResult = m_score.getDifference();
+
+            if(java.lang.Math.abs(minusResult) > 1){
+                if(m_score.isPlayer1Better()) score = "Win for " + player1Name;
+                else score ="Win for " + player2Name;
+            }
+            else{
+                if(m_score.isPlayer1Better()) score ="Advantage " + player1Name;
+                else score ="Advantage " + player2Name;
+            }
         }
         else
         {
-            for (int i=1; i<3; i++)
-            {
-                if (i==1) tempScore = m_score1;
-                else { score+="-"; tempScore = m_score2;}
-                switch(tempScore)
-                {
-                    case 0:
-                        score+="Love";
-                        break;
-                    case 1:
-                        score+="Fifteen";
-                        break;
-                    case 2:
-                        score+="Thirty";
-                        break;
-                    case 3:
-                        score+="Forty";
-                        break;
-                }
-            }
+            score = scoreNames.get(m_score.get(1)) + "-" + scoreNames.get(m_score.get(2));
         }
         return score;
     }
